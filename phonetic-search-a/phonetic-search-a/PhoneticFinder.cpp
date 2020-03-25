@@ -4,20 +4,25 @@ using namespace std;
 
 namespace phonetic{
   string find(string text, string word){
-	 int ans;
+	 
+	int ans;
 	int l = text.length();
 	string tempWord;
+	
     for (int i = 0; i < l; i++) { 
-	if(text.at(i) == ' ' || i==l-1){
+	if(text.at(i) == ' ' || i == l-1){
+		if(i==l-1){
+			 tempWord+=text.at(i);
+		}
 	 ans=compareWord(tempWord,word);
 	  if(ans ==0){
-	 return tempWord;
+	  return tempWord;
+	 }
+	 else if(i== l-1 && ans !=1){
+		throw std::out_of_range("The word not in the text");
 	 }
 	 else{
-	
-	
-		 throw std::out_of_range("The word not in the text");
-	
+		tempWord="";  
 	 }
 	 
 		 }
@@ -27,7 +32,7 @@ namespace phonetic{
 		 
 	}
 	
-  return"1";}
+  return 0;}
   
   int compareWord(string tempWord, string word){
 	  int l=tempWord.length();
@@ -35,7 +40,7 @@ namespace phonetic{
 		  return 1;
 	  }
 	  for (int i = 0; i < l;) {
-	   if(tempWord.at(i) ==word.at(i)){
+	   if(tempWord.at(i) ==word.at(i) || tempWord.at(i) ==word.at(i)+32 || tempWord.at(i) ==word.at(i)-32 ){
 	   i++;
 	   }
 	   else if(word.at(i) == 't' || word.at(i) == 'd' ||word.at(i) == 'T' || word.at(i) == 'D' ){
